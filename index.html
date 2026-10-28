@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>고운 우리말 찾기</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Jua&family=Black+Han+Sans&family=Gaegu:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f7efe2;--card:#fffaf2;--ink:#4a3f35;--soft:#8a7a69;--line:#eadcc6;--accent:#e59a7a;--accent2:#7fb7a4}
 *{box-sizing:border-box}
@@ -45,22 +45,45 @@ main{max-width:1080px;margin:0 auto;padding:10px 18px 60px}
 .btn.main{background:var(--accent2);border-color:var(--accent2);color:#fff}
 .empty{text-align:center;color:var(--soft);padding:40px 10px;font-size:18px}
 .note{max-width:860px;margin:40px auto 0;text-align:center;font-size:14px;color:var(--soft)}
-/* 미리보기 */
-.dim{position:fixed;inset:0;background:rgba(74,63,53,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
-.dim.show{display:flex}
-.modal{background:var(--card);border-radius:24px;padding:24px;max-width:460px;width:100%;text-align:center}
-.modal h3{font-family:"Jua";font-weight:400;font-size:26px;margin:0 0 4px}
-.modal .hint{font-size:14px;color:var(--soft);margin:0 0 14px}
-.badge{width:300px;height:300px;margin:0 auto;border-radius:50%;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #cbb9a0;overflow:hidden}
-.badge .ring{position:absolute;width:83.45%;height:83.45%;border-radius:50%;border:2px dashed rgba(0,0,0,.25)}
-.badge .bw{font-family:"Gowun Batang",serif;font-weight:700;font-size:56px;line-height:1.1;z-index:1}
-.badge .be{font-size:40px;z-index:1}
-.badge .bm{font-size:15px;max-width:62%;z-index:1;margin-top:4px}
-.swatch{display:flex;gap:8px;justify-content:center;margin:16px 0 10px}
-.swatch button{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--line)}
-.opts{display:flex;gap:14px;justify-content:center;font-size:15px;margin-bottom:14px}
-.close{font-family:"Jua";font-size:18px;border:0;background:var(--accent);color:#fff;border-radius:999px;padding:8px 30px}
-@media (max-width:520px){.banner{height:96px}.banner .big{font-size:46px}.banner h2{font-size:26px}.badge{width:250px;height:250px}.badge .bw{font-size:44px}}
+/* 뱃지 스튜디오 */
+.dim{position:fixed;inset:0;background:rgba(40,32,26,.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
+.dim.show{display:flex;animation:fade .2s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.studio{background:#fff;border-radius:28px;max-width:960px;width:100%;max-height:calc(100vh - 32px);overflow:auto;display:grid;grid-template-columns:1.05fr 1fr;box-shadow:0 30px 80px rgba(40,30,20,.25)}
+.stage{background:linear-gradient(160deg,#f6f1ea,#ece4d8);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:34px 20px 24px;position:relative;border-radius:28px 0 0 28px}
+.stage .lbl{position:absolute;top:18px;left:22px;font-size:13px;letter-spacing:.08em;color:#9b8b78;font-weight:700}
+.btnwrap{position:relative;width:min(340px,70vw);aspect-ratio:1}
+.btnwrap .rim{position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(from 210deg,#f4f4f6,#c9cad1,#ffffff,#b9bac2,#eeeef1,#c6c7ce,#f4f4f6);box-shadow:0 26px 40px rgba(60,45,30,.28),0 6px 10px rgba(60,45,30,.12)}
+.btnwrap svg.face{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.btnwrap .gloss{position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse 60% 42% at 34% 24%,rgba(255,255,255,.55),rgba(255,255,255,0) 70%),radial-gradient(circle at 50% 50%,rgba(255,255,255,0) 68%,rgba(0,0,0,.10) 100%);pointer-events:none}
+.btnwrap.flat .rim,.btnwrap.flat .gloss{display:none}
+.viewtog{display:flex;gap:4px;background:rgba(255,255,255,.7);border-radius:999px;padding:4px;margin-top:30px}
+.viewtog button{border:0;background:transparent;border-radius:999px;padding:7px 14px;font-size:13.5px;color:#7a6b5c}
+.viewtog button.on{background:#fff;color:#3d342c;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.stage .cap{font-size:12.5px;color:#9b8b78;margin-top:10px;text-align:center;min-height:18px}
+.panel{padding:26px 26px 22px;display:flex;flex-direction:column;gap:18px}
+.panel .top{display:flex;justify-content:space-between;align-items:flex-start}
+.panel h3{font-family:"Gowun Batang",serif;font-weight:700;font-size:30px;margin:0;line-height:1.1;color:#3d342c}
+.panel .sm{font-size:14px;color:#9b8b78;margin:4px 0 0}
+.xbtn{border:0;background:#f4efe8;width:38px;height:38px;border-radius:50%;font-size:18px;color:#6b5d50;flex:none}
+.grp h4{margin:0 0 9px;font-size:13px;letter-spacing:.06em;color:#9b8b78}
+.tpls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tpl{border:2px solid transparent;background:#f7f3ee;border-radius:16px;padding:6px 4px 5px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;color:#6b5d50;transition:transform .12s}
+.tpl:hover{transform:translateY(-2px)}
+.tpl svg{width:100%;aspect-ratio:1;border-radius:50%}
+.tpl.on{border-color:#3d342c;background:#fff}
+.pals{display:flex;gap:10px;flex-wrap:wrap}
+.pal{width:40px;height:40px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1.5px #e6ddd2;padding:0}
+.pal.on{box-shadow:0 0 0 2.5px #3d342c}
+.fonts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.fnt{border:1.5px solid #ebe3d8;background:#fff;border-radius:12px;padding:8px 2px;font-size:19px;color:#3d342c}
+.fnt.on{border-color:#3d342c;background:#3d342c;color:#fff}
+.tgls{display:flex;gap:8px;flex-wrap:wrap}
+.tg{border:1.5px solid #ebe3d8;background:#fff;border-radius:999px;padding:7px 14px;font-size:14px;color:#6b5d50}
+.tg.on{background:#eef6f2;border-color:#7fb7a4;color:#2f6b58;font-weight:700}
+.tip{font-size:13px;color:#8a7a69;background:#faf6f0;border-radius:14px;padding:10px 14px;margin:0}
+@media (max-width:760px){.studio{grid-template-columns:1fr}.stage{border-radius:28px 28px 0 0;padding-top:44px}.tpls{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:520px){.banner{height:96px}.banner .big{font-size:46px}.banner h2{font-size:26px}}
 </style>
 </head>
 <body>
@@ -76,17 +99,22 @@ main{max-width:1080px;margin:0 auto;padding:10px 18px 60px}
 <main id="out"></main>
 <p class="note">🔒 입력한 낱말은 이 화면 안에서만 쓰이고, 어디에도 저장되거나 전송되지 않아요. 이름 같은 개인정보는 적지 않아요.<br>뜻풀이는 표준국어대사전을 바탕으로 쉽게 풀어 썼어요. 정확한 뜻은 ‘사전 확인’ 버튼으로 살펴보세요.</p>
 
-<div class="dim" id="dim" role="dialog" aria-modal="true">
-  <div class="modal">
-    <h3>뱃지 미리보기</h3>
-    <p class="hint">점선 안쪽이 뱃지 앞면(58mm)에 보이는 부분이에요</p>
-    <div class="badge" id="badge"><div class="ring"></div><div class="be" id="be"></div><div class="bw" id="bw"></div><div class="bm" id="bm"></div></div>
-    <div class="swatch" id="sw"></div>
-    <div class="opts">
-      <label><input type="checkbox" id="oe" checked> 그림</label>
-      <label><input type="checkbox" id="om" checked> 뜻</label>
+<div class="dim" id="dim" role="dialog" aria-modal="true" aria-label="뱃지 꾸미기">
+  <div class="studio">
+    <div class="stage">
+      <span class="lbl">BADGE PREVIEW</span>
+      <div class="btnwrap" id="bwrap"><div class="rim"></div><svg class="face" id="face" viewBox="0 0 695 695"></svg><div class="gloss"></div></div>
+      <div class="viewtog" id="vt"><button type="button" data-v="badge" class="on">완성 뱃지</button><button type="button" data-v="sheet">속지 전체</button></div>
+      <p class="cap" id="cap"></p>
     </div>
-    <button class="close" id="x">닫기</button>
+    <div class="panel">
+      <div class="top"><div><h3 id="pw"></h3><p class="sm" id="pm"></p></div><button class="xbtn" id="x" type="button" aria-label="닫기">✕</button></div>
+      <div class="grp"><h4>디자인</h4><div class="tpls" id="tpls"></div></div>
+      <div class="grp"><h4>색 조합</h4><div class="pals" id="pals"></div></div>
+      <div class="grp"><h4>글꼴</h4><div class="fonts" id="fonts"></div></div>
+      <div class="grp"><h4>넣을 것</h4><div class="tgls" id="tgls"></div></div>
+      <p class="tip">💡 마음에 드는 디자인을 참고해서 속지에 직접 그리고 꾸며 보세요.</p>
+    </div>
   </div>
 </div>
 
@@ -307,21 +335,103 @@ const TOPICS = [
   }
   $("#f").addEventListener("submit",e=>{e.preventDefault();run($("#q").value)});
 
-  // 뱃지 미리보기
-  const COLORS=["#fffaf2","#ffe3ea","#e3f1ff","#e4f6e7","#fff3c4","#ece3fb","#ffe2cc"];
-  let cur=null,bg=COLORS[0];
-  const sw=$("#sw");
-  COLORS.forEach(c=>{const b=document.createElement("button");b.type="button";b.style.background=c;b.setAttribute("aria-label","배경색");b.onclick=()=>{bg=c;paint()};sw.appendChild(b)});
-  function paint(){if(!cur)return;const [w,t]=cur;
-    $("#badge").style.background=bg;$("#bw").textContent=w[0];
-    $("#be").textContent=$("#oe").checked?w[3]:"";$("#bm").textContent=$("#om").checked?w[1]:"";
-    $("#bw").style.fontSize=(w[0].length>4?(w[0].length>5?34:42):56)+"px";}
-  $("#oe").onchange=paint;$("#om").onchange=paint;
-  document.addEventListener("click",e=>{const b=e.target.closest("[data-w]");if(!b)return;
-    const t=TOPICS.find(x=>x.name===b.dataset.t);const w=t.words.find(x=>x[0]===b.dataset.w);
-    cur=[w,t];paint();$("#dim").classList.add("show");});
+  // ===== 뱃지 스튜디오 =====
+  const C0=347.5, RV=290; // 0.1mm 단위: 속지 69.5mm, 보이는 면 58mm
+  const FONTS=[["둥글게","Jua, sans-serif",400],["굵게","'Black Han Sans', sans-serif",400],["단정하게","'Gowun Batang', serif",700],["손글씨","Gaegu, cursive",700]];
+  const TPLS=[
+   {id:"soft",name:"솜사탕",font:0,pals:[["#ffd6e0","#ffeedd","#d65a7a"],["#d6ecff","#eaf7f1","#3f78b0"],["#e9dcff","#ffe6f2","#7b55c7"],["#fff1bf","#ffdccb","#d0743a"]]},
+   {id:"night",name:"별밤",font:2,pals:[["#1d2a52","#3b3f86","#f6d77b"],["#14363f","#2a6b6a","#ffe6a8"],["#2b1d4a","#6a3f86","#ffd1e6"],["#101820","#34465c","#cfe8ff"]]},
+   {id:"sun",name:"햇살",font:1,pals:[["#ffd8a8","#ffeacc","#c4502f"],["#bfe6d6","#e1f5ec","#2f7a62"],["#ffc8d2","#ffe6eb","#b23a5a"],["#cfe0ff","#e8f0ff","#3653a6"]]},
+   {id:"mini",name:"미니멀",font:2,pals:[["#fbf7f1","#e7dccd","#3d342c"],["#f3f6f2","#cfdccf","#2f4a3a"],["#f6f3fb","#dcd3ec","#3e3460"],["#fdf3f1","#efd2cb","#5a2f28"]]},
+   {id:"dot",name:"스티커",font:0,pals:[["#ffe7a3","#ffffff","#5a4a2a"],["#c9ecff","#ffffff","#24506e"],["#ffd0dc","#ffffff","#7a2e44"],["#d4f2cf","#ffffff","#2c5a2a"]]},
+   {id:"wave",name:"물결",font:0,pals:[["#cfeafa","#7fc0e0","#1f4f6b"],["#ffe1cc","#f4a88a","#7a3a22"],["#e2e9ff","#9aa9ee","#2c3a7a"],["#dff5ea","#8fd1b2","#245a43"]]},
+   {id:"blob",name:"몽글",font:3,pals:[["#fff6ec","#ffb59e","#3d342c"],["#f2fbf6","#9fd8bd","#28463a"],["#f8f4ff","#c3b2f2","#3a3058"],["#fffbe6","#ffd56b","#4a3a14"]]},
+   {id:"frame",name:"꽃테",font:2,pals:[["#fffaf3","#f4a7b9","#5a3a40"],["#f7fbff","#a9c8ee","#2e4766"],["#fbfff6","#b9dd9a","#3a5228"],["#fff9f0","#f2c27a","#5a4320"]]}
+  ];
+  const st={t:0,p:0,f:null,emo:true,mean:true,label:true,view:"badge"};
+  let cur=null;
+  const X=s=>esc(s);
+  function rand(seed){let s=seed;return()=>((s=(s*9301+49297)%233280)/233280)}
+  function wsize(w,ff){const n=[...w].length;const base=n<=2?175:n===3?140:n===4?112:n===5?92:78;return ff===1?base*.92:base}
+  function arc(id,r,top){return top?`<path id="${id}" d="M ${C0-r} ${C0} A ${r} ${r} 0 0 1 ${C0+r} ${C0}" fill="none"/>`:`<path id="${id}" d="M ${C0-r} ${C0} A ${r} ${r} 0 0 0 ${C0+r} ${C0}" fill="none"/>`}
+  function curved(id,txt,r,top,col,fs,ff,ls){return `${arc(id,r,top)}<text font-family="${ff}" font-size="${fs}" fill="${col}" letter-spacing="${ls||2}" text-anchor="middle"><textPath href="#${id}" startOffset="50%">${X(txt)}</textPath></text>`}
+  function render(word,mean,emo,o,uid){
+    const T=TPLS[o.t],P=T.pals[o.p],F=FONTS[o.f??T.font],ff=F[1],fw=F[2];
+    const [a,b,ink]=P, ws=wsize(word,o.f??T.font), mlen=[...mean].length, mfs=Math.max(20,Math.min(28,560/mlen));
+    const showE=o.emo&&emo, showM=o.mean, showL=o.label;
+    const g=`g${uid}`; let s=`<defs><radialGradient id="${g}r" cx="50%" cy="40%" r="65%"><stop offset="0" stop-color="${b}"/><stop offset="1" stop-color="${a}"/></radialGradient><linearGradient id="${g}l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient><clipPath id="${g}c"><circle cx="${C0}" cy="${C0}" r="${C0}"/></clipPath><filter id="${g}b"><feGaussianBlur stdDeviation="28"/></filter><filter id="${g}s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity=".15"/></filter></defs><g clip-path="url(#${g}c)">`;
+    const wordY=C0+ws*0.36+(showE?28:0)-(showM&&T.id==="mini"?18:0);
+    const W=(col,y,extra)=>`<text x="${C0}" y="${y??wordY}" text-anchor="middle" font-family="${ff}" font-weight="${fw}" font-size="${ws}" fill="${col}" ${extra||""}>${X(word)}</text>`;
+    const E=(y,size)=>showE?`<text x="${C0}" y="${y}" text-anchor="middle" font-size="${size||74}">${X(emo)}</text>`:"";
+    const ey=C0-ws*0.62;
+    if(T.id==="soft"){
+      s+=`<rect width="695" height="695" fill="url(#${g}r)"/><g filter="url(#${g}b)" opacity=".85"><circle cx="190" cy="200" r="130" fill="${b}"/><circle cx="520" cy="470" r="150" fill="${a}"/><circle cx="500" cy="170" r="90" fill="#ffffff"/></g>`;
+      s+=E(ey)+W(ink)+(showM?curved(g+"m",mean,225,false,ink,mfs,ff,1):"")+(showL?curved(g+"t","순우리말 · 고운 말",238,true,ink,24,ff,8):"");
+    }else if(T.id==="night"){
+      const R=rand(7);let stars="";for(let i=0;i<46;i++){const x=R()*695,y=R()*695,r=1.5+R()*3.2;stars+=`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity="${.35+R()*.6}"/>`}
+      s+=`<rect width="695" height="695" fill="url(#${g}l)"/>${stars}<path d="M530 120 a56 56 0 1 0 40 96 a45 45 0 1 1 -40 -96z" fill="${ink}" opacity=".9"/>`;
+      s+=showE?E(C0-ws*.5,58):`<path d="M${C0} ${C0-ws*.95} l8 22 22 8 -22 8 -8 22 -8 -22 -22 -8 22 -8z" fill="${ink}"/>`;
+      s+=W(ink,C0+ws*.36+(showE?14:0))+(showM?curved(g+"m",mean,228,false,"#ffffff",mfs,ff,1):"")+(showL?curved(g+"t","✦ 순우리말 ✦",240,true,ink,24,ff,10):"");
+    }else if(T.id==="sun"){
+      let rays="";for(let i=0;i<24;i++){const a1=i*15*Math.PI/180,a2=(i+1)*15*Math.PI/180;rays+=`<path d="M${C0} ${C0} L${C0+500*Math.cos(a1)} ${C0+500*Math.sin(a1)} L${C0+500*Math.cos(a2)} ${C0+500*Math.sin(a2)}Z" fill="${i%2?a:b}"/>`}
+      s+=rays+`<circle cx="${C0}" cy="${C0}" r="${Math.max(ws*1.15,150)}" fill="#fffdf8"/><circle cx="${C0}" cy="${C0}" r="${Math.max(ws*1.15,150)-12}" fill="none" stroke="${ink}" stroke-width="3" stroke-dasharray="4 10" stroke-linecap="round"/>`;
+      s+=E(C0-ws*.48,60)+W(ink,C0+ws*.36+(showE?20:0))+(showM?`<rect x="${C0-215}" y="505" width="430" height="58" rx="29" fill="${ink}"/><text x="${C0}" y="545" text-anchor="middle" font-family="${ff}" font-size="${Math.min(28,560/mlen)}" fill="#fff">${X(mean)}</text>`:"")+(showL?curved(g+"t","URIMAL · 순우리말",250,true,ink,24,"'Black Han Sans',sans-serif",8):"");
+    }else if(T.id==="mini"){
+      s+=`<rect width="695" height="695" fill="${a}"/><circle cx="${C0}" cy="${C0}" r="262" fill="none" stroke="${ink}" stroke-width="2.5"/><circle cx="${C0}" cy="${C0}" r="250" fill="none" stroke="${ink}" stroke-width="1"/>`;
+      s+=`<line x1="${C0-40}" y1="${C0+ws*.62}" x2="${C0+40}" y2="${C0+ws*.62}" stroke="${b}" stroke-width="4" stroke-linecap="round"/>`;
+      s+=E(ey,56)+W(ink)+(showM?`<text x="${C0}" y="${C0+ws*.62+52}" text-anchor="middle" font-family="${ff}" font-size="${Math.min(30,470/mlen)}" fill="${ink}" opacity=".75">${X(mean)}</text>`:"")+(showL?`<text x="${C0}" y="168" text-anchor="middle" font-family="'Gowun Batang',serif" font-size="22" letter-spacing="10" fill="${ink}" opacity=".6">순 우 리 말</text>`:"");
+    }else if(T.id==="dot"){
+      let dots="";for(let y=0;y<16;y++)for(let x=0;x<16;x++){if((x+y)%2)continue;dots+=`<circle cx="${x*46+(y%2?23:0)}" cy="${y*46}" r="9" fill="${b}" opacity=".55"/>`}
+      const w2=ws*.72, lw=Math.min(430,w2*[...word].length*1.02+80), lh=w2*1.25;
+      s+=`<rect width="695" height="695" fill="${a}"/>${dots}`+(showE?`<text x="${C0}" y="${C0-38}" text-anchor="middle" font-size="104" filter="url(#${g}s)">${X(emo)}</text>`:"");
+      const ly=showE?C0-10:C0-lh/2-(showM?24:0);
+      s+=`<rect x="${C0-lw/2}" y="${ly}" width="${lw}" height="${lh}" rx="${lh*.36}" fill="#fff" filter="url(#${g}s)"/><text x="${C0}" y="${ly+lh*.73}" text-anchor="middle" font-family="${ff}" font-weight="${fw}" font-size="${w2}" fill="${ink}">${X(word)}</text>`+(showM?`<text x="${C0}" y="${ly+lh+40}" text-anchor="middle" font-family="${ff}" font-size="${Math.min(24,400/mlen)}" fill="${ink}">${X(mean)}</text>`:"");
+    }else if(T.id==="wave"){
+      s+=`<rect width="695" height="695" fill="${a}"/><circle cx="520" cy="180" r="56" fill="#fff" opacity=".8"/>`;
+      s+=`<path d="M0 470 Q90 430 175 470 T350 470 T525 470 T700 470 V700 H0Z" fill="${b}" opacity=".55"/><path d="M0 515 Q90 480 175 515 T350 515 T525 515 T700 515 V700 H0Z" fill="${b}" opacity=".8"/><path d="M0 565 Q90 535 175 565 T350 565 T525 565 T700 565 V700 H0Z" fill="${ink}" opacity=".35"/>`;
+      s+=(showE?`<text x="${C0-ws*.9}" y="${C0-ws*.55}" text-anchor="middle" font-size="58">${X(emo)}</text>`:"")+W(ink,C0+ws*.12)+(showM?`<text x="${C0}" y="${C0+ws*.12+56}" text-anchor="middle" font-family="${ff}" font-size="${Math.min(28,470/mlen)}" fill="${ink}">${X(mean)}</text>`:"")+(showL?curved(g+"t","순우리말",238,true,ink,24,ff,10):"");
+    }else if(T.id==="blob"){
+      s+=`<rect width="695" height="695" fill="${a}"/><path d="M150 220 C140 120 300 90 380 130 C470 170 590 150 600 270 C612 380 560 470 470 520 C370 580 250 560 180 480 C110 400 158 330 150 220Z" fill="${b}"/><circle cx="560" cy="520" r="34" fill="${b}" opacity=".7"/><circle cx="140" cy="520" r="18" fill="${ink}" opacity=".85"/><circle cx="580" cy="150" r="12" fill="${ink}" opacity=".85"/>`;
+      s+=`<path d="M120 300 q20 -20 40 0 t40 0" fill="none" stroke="${ink}" stroke-width="5" stroke-linecap="round"/>`;
+      s+=E(ey,64)+W(ink)+(showM?curved(g+"m",mean,226,false,ink,mfs,ff,1):"");
+    }else if(T.id==="frame"){
+      s+=`<rect width="695" height="695" fill="${a}"/>`;
+      for(let i=0;i<14;i++){const an=i/14*Math.PI*2,x=C0+252*Math.cos(an),y=C0+252*Math.sin(an);s+=`<g transform="translate(${x} ${y}) rotate(${an*57.3})">${[0,72,144,216,288].map(r=>`<ellipse cx="0" cy="-13" rx="9" ry="14" fill="${b}" transform="rotate(${r})"/>`).join("")}<circle r="6" fill="#fff"/></g>`}
+      s+=E(ey,62)+W(ink)+(showM?`<text x="${C0}" y="${wordY+56}" text-anchor="middle" font-family="${ff}" font-size="${Math.min(28,440/mlen)}" fill="${ink}" opacity=".85">${X(mean)}</text>`:"");
+    }
+    s+=`</g>`;
+    return s;
+  }
+  function draw(){
+    if(!cur)return;const w=cur;
+    const o={t:st.t,p:st.p,f:st.f,emo:st.emo,mean:st.mean,label:st.label};
+    let svg=render(w[0],w[1],w[3],o,"main");
+    const sheet=st.view==="sheet";
+    $("#bwrap").classList.toggle("flat",sheet);
+    if(sheet){svg+=`<circle cx="${C0}" cy="${C0}" r="${RV}" fill="none" stroke="#3d342c" stroke-opacity=".5" stroke-width="3" stroke-dasharray="14 10"/><circle cx="${C0}" cy="${C0}" r="${C0-1.5}" fill="none" stroke="#3d342c" stroke-width="3"/>`;
+      $("#face").setAttribute("viewBox","0 0 695 695");$("#cap").textContent="실선: 오리는 선(69.5mm) · 점선: 앞면에 보이는 곳(58mm)";}
+    else{$("#face").setAttribute("viewBox",`${C0-RV} ${C0-RV} ${RV*2} ${RV*2}`);$("#cap").textContent="버튼프레스로 누르면 이렇게 보여요";}
+    $("#face").innerHTML=svg;
+    // 썸네일
+    $("#tpls").innerHTML=TPLS.map((T,i)=>`<button type="button" class="tpl${i===st.t?" on":""}" data-tp="${i}"><svg viewBox="${C0-RV} ${C0-RV} ${RV*2} ${RV*2}">${render(w[0],w[1],w[3],{t:i,p:i===st.t?st.p:0,f:null,emo:st.emo,mean:false,label:false},"t"+i)}</svg>${T.name}</button>`).join("");
+    $("#pals").innerHTML=TPLS[st.t].pals.map((p,i)=>`<button type="button" class="pal${i===st.p?" on":""}" data-pl="${i}" aria-label="색 조합 ${i+1}" style="background:linear-gradient(135deg,${p[0]} 0 50%,${p[1]} 50% 100%);box-shadow:0 0 0 ${i===st.p?"2.5px #3d342c":"1.5px #e6ddd2"},inset 0 0 0 9px transparent"><span style="display:block;width:12px;height:12px;border-radius:50%;background:${p[2]};margin:auto"></span></button>`).join("");
+    const fi=st.f??TPLS[st.t].font;
+    $("#fonts").innerHTML=FONTS.map((F,i)=>`<button type="button" class="fnt${i===fi?" on":""}" data-fn="${i}" style="font-family:${F[1]};font-weight:${F[2]}">${F[0]}</button>`).join("");
+    $("#tgls").innerHTML=[["emo","그림"],["mean","뜻"],["label","장식 글씨"]].map(([k,l])=>`<button type="button" class="tg${st[k]?" on":""}" data-tg="${k}">${st[k]?"✓ ":""}${l}</button>`).join("");
+  }
+  document.addEventListener("click",e=>{
+    const b=e.target.closest("[data-w]");
+    if(b){const t=TOPICS.find(x=>x.name===b.dataset.t);cur=t.words.find(x=>x[0]===b.dataset.w);
+      $("#pw").textContent=cur[0];$("#pm").textContent=cur[1];draw();$("#dim").classList.add("show");return;}
+    const tp=e.target.closest("[data-tp]");if(tp){st.t=+tp.dataset.tp;st.p=0;st.f=null;draw();return}
+    const pl=e.target.closest("[data-pl]");if(pl){st.p=+pl.dataset.pl;draw();return}
+    const fn=e.target.closest("[data-fn]");if(fn){st.f=+fn.dataset.fn;draw();return}
+    const tg=e.target.closest("[data-tg]");if(tg){st[tg.dataset.tg]=!st[tg.dataset.tg];draw();return}
+    const v=e.target.closest("[data-v]");if(v){st.view=v.dataset.v;[...$("#vt").children].forEach(c=>c.classList.toggle("on",c===v));draw();return}
+  });
   $("#x").onclick=()=>$("#dim").classList.remove("show");
   $("#dim").addEventListener("click",e=>{if(e.target.id==="dim")$("#dim").classList.remove("show")});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#dim").classList.remove("show")});
   run("");
 })();
 </script>
